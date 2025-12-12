@@ -52,82 +52,82 @@ nest_asyncio.apply()
 
 
 # %%
-student_outputs_data = [
-    # Index 1: Graph (1 path) - CORRECT (function call format)
-    {
-        "index": 1,
-        "output": "To find the shortest path from node 0 to node 9, I'll use Dijkstra's algorithm.\n\nLooking at the edges from node 0: 0->8 has weight 3, which is the smallest.\nFrom node 8: 8->9 has weight 22.\nTotal: 3 + 22 = 25\n\nsubmit_paths(paths=[[0, 8, 9]], weights=[25])"
-    },
+# student_outputs_data = [
+#     # Index 1: Graph (1 path) - CORRECT (function call format)
+#     {
+#         "index": 1,
+#         "output": "To find the shortest path from node 0 to node 9, I'll use Dijkstra's algorithm.\n\nLooking at the edges from node 0: 0->8 has weight 3, which is the smallest.\nFrom node 8: 8->9 has weight 22.\nTotal: 3 + 22 = 25\n\nsubmit_paths(paths=[[0, 8, 9]], weights=[25])"
+#     },
 
-    # Index 2: Graph (3 paths) - PARTIALLY CORRECT (2 of 3, gold-like format)
-    {
-        "index": 2,
-        "output": "Finding top 3 shortest paths from 0 to 15:\n\n1. 0 -> 7 -> 8 -> 15: 77 + 45 + 108 = 230\n2. 0 -> 4 -> 8 -> 15: 125 + 28 + 108 = 261\n\n{\"paths\": [{\"path\": [0, 7, 8, 15], \"weight\": 230}, {\"path\": [0, 4, 8, 15], \"weight\": 261}]}"
-    },
+#     # Index 2: Graph (3 paths) - PARTIALLY CORRECT (2 of 3, gold-like format)
+#     {
+#         "index": 2,
+#         "output": "Finding top 3 shortest paths from 0 to 15:\n\n1. 0 -> 7 -> 8 -> 15: 77 + 45 + 108 = 230\n2. 0 -> 4 -> 8 -> 15: 125 + 28 + 108 = 261\n\n{\"paths\": [{\"path\": [0, 7, 8, 15], \"weight\": 230}, {\"path\": [0, 4, 8, 15], \"weight\": 261}]}"
+#     },
 
-    # Index 3: InfoBench (PyTorch NN) - GOOD (has comments, correct structure)
-    {
-        "index": 3,
-        "output": """```python
-import torch
-import torch.nn as nn
+#     # Index 3: InfoBench (PyTorch NN) - GOOD (has comments, correct structure)
+#     {
+#         "index": 3,
+#         "output": """```python
+# import torch
+# import torch.nn as nn
 
-# Define a two-hidden layer feedforward neural network
-class TwoHiddenLayerNN(nn.Module):
-    def __init__(self, input_size, output_size):
-        super(TwoHiddenLayerNN, self).__init__()
+# # Define a two-hidden layer feedforward neural network
+# class TwoHiddenLayerNN(nn.Module):
+#     def __init__(self, input_size, output_size):
+#         super(TwoHiddenLayerNN, self).__init__()
 
-        # First hidden layer with 64 neurons
-        self.fc1 = nn.Linear(input_size, 64)
+#         # First hidden layer with 64 neurons
+#         self.fc1 = nn.Linear(input_size, 64)
 
-        # Second hidden layer with 64 neurons
-        self.fc2 = nn.Linear(64, 64)
+#         # Second hidden layer with 64 neurons
+#         self.fc2 = nn.Linear(64, 64)
 
-        # Output layer
-        self.fc3 = nn.Linear(64, output_size)
+#         # Output layer
+#         self.fc3 = nn.Linear(64, output_size)
 
-        # ReLU activation function
-        self.relu = nn.ReLU()
+#         # ReLU activation function
+#         self.relu = nn.ReLU()
 
-    def forward(self, x):
-        # Pass through first hidden layer with ReLU
-        x = self.relu(self.fc1(x))
+#     def forward(self, x):
+#         # Pass through first hidden layer with ReLU
+#         x = self.relu(self.fc1(x))
 
-        # Pass through second hidden layer with ReLU
-        x = self.relu(self.fc2(x))
+#         # Pass through second hidden layer with ReLU
+#         x = self.relu(self.fc2(x))
 
-        # Output layer (no activation for raw logits)
-        x = self.fc3(x)
-        return x
+#         # Output layer (no activation for raw logits)
+#         x = self.fc3(x)
+#         return x
 
-# Example usage
-model = TwoHiddenLayerNN(input_size=10, output_size=2)
-```"""
-    },
+# # Example usage
+# model = TwoHiddenLayerNN(input_size=10, output_size=2)
+# ```"""
+#     },
 
-    # Index 4: InfoBench (Email) - PARTIAL (is email, about salary, but too short/informal)
-    {
-        "index": 4,
-        "output": "Subject: Salary\n\nHi,\n\nI want more money.\n\nThanks"
-    },
+#     # Index 4: InfoBench (Email) - PARTIAL (is email, about salary, but too short/informal)
+#     {
+#         "index": 4,
+#         "output": "Subject: Salary\n\nHi,\n\nI want more money.\n\nThanks"
+#     },
 
-    # Index 5: MMLU - CORRECT
-    {
-        "index": 5,
-        "output": "Let me analyze each option:\n\n- Glucose: ~4 kcal/gram\n- Palmitic acid (fat): ~9 kcal/gram\n- Leucine (amino acid): ~4 kcal/gram\n- Alcohol: ~7 kcal/gram\n\nFats release the most energy when oxidized. Palmitic acid is a fatty acid.\n\nThe answer is \\boxed{B}"
-    },
+#     # Index 5: MMLU - CORRECT
+#     {
+#         "index": 5,
+#         "output": "Let me analyze each option:\n\n- Glucose: ~4 kcal/gram\n- Palmitic acid (fat): ~9 kcal/gram\n- Leucine (amino acid): ~4 kcal/gram\n- Alcohol: ~7 kcal/gram\n\nFats release the most energy when oxidized. Palmitic acid is a fatty acid.\n\nThe answer is \\boxed{B}"
+#     },
 
-    # Index 6: MMLU - WRONG (chose A instead of C)
-    {
-        "index": 6,
-        "output": "The patient has elevated lymphocytes, which suggests leukemia. Since they're B-cell origin, it's lymphocytic. The answer is \\boxed{A}"
-    }
-]
-# Save to file
-with open("student_outputs.jsonl", "w") as f:
-    for item in student_outputs_data:
-        f.write(json.dumps(item) + "\n")
-print("Created student_outputs.jsonl")
+#     # Index 6: MMLU - WRONG (chose A instead of C)
+#     {
+#         "index": 6,
+#         "output": "The patient has elevated lymphocytes, which suggests leukemia. Since they're B-cell origin, it's lymphocytic. The answer is \\boxed{A}"
+#     }
+# ]
+# # Save to file
+# with open("student_outputs.jsonl", "w") as f:
+#     for item in student_outputs_data:
+#         f.write(json.dumps(item) + "\n")
+# print("Created student_outputs.jsonl")
 
 # %%
 def load_hidden_test(path: str) -> List[Dict[str, Any]]:
@@ -228,9 +228,30 @@ def run_eval(
     results = []
 
     for idx, test_item in enumerate(tqdm(hidden_test, desc="Evaluating")):
-        index = test_item["index"]
-        student_response = student_outputs.get(index, "")
-        result = evaluate_single(idx, test_item, student_response, infobench_evaluator)
+        if test_item["task"] == "infobench":
+            index = test_item["index"]
+            task = test_item["task"]
+            prompt = test_item["prompt"]
+            gold_answer = test_item["gold_answer"]
+            meta = test_item.get("meta", {})
+
+            score = 0.0
+            student_response = student_outputs.get(index, "")
+            details = {"error": f"Unknown task {task}"}
+
+            result = {
+                "index": index,
+                "task": task,
+                "prompt": prompt,  # Input that student saw
+                "student_output": student_response,  # Raw output from student
+                "gold_answer": gold_answer,
+                "score": score,
+                "eval_details": details
+            }
+        else:
+            index = test_item["index"]
+            student_response = student_outputs.get(index, "")
+            result = evaluate_single(idx, test_item, student_response, infobench_evaluator)
         results.append(result)
 
     return results
@@ -240,7 +261,7 @@ def run_eval(
 # # RUN EVALUATION
 
 # %%
-openai_key = os.getenv("OPENAI_API_KEY")
+openai_key = 'ddd'
 
 # %%
 
@@ -248,7 +269,7 @@ openai_key = os.getenv("OPENAI_API_KEY")
 HIDDEN_TEST_PATH = "combined_dataset.jsonl"
 STUDENT_OUTPUT_PATH = "student_outputs.jsonl"
 OUTPUT_DIR = "./eval_results"
-STUDENT_ID = "test_student"
+STUDENT_ID = "test_student_mu_al"
 EVAL_MODEL = "gpt-5-nano-2025-08-07"
 
 if not openai_key:

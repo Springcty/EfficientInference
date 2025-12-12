@@ -1,0 +1,22 @@
+{
+  "student_id": "test_tianyuca",
+  "total_examples": 300,
+  "task_metrics": {
+    "mmlu_med": {
+      "count": 100,
+      "accuracy": 0.81,
+      "total_score": 81.0
+    },
+    "graph": {
+      "count": 100,
+      "accuracy": 1.0,
+      "total_score": 100.0
+    },
+    "infobench": {
+      "count": 100,
+      "accuracy": 0.7594100899100898,
+      "total_score": 75.94100899100899
+    }
+  },
+  "overall_accuracy": 0.8564700299700299
+}
